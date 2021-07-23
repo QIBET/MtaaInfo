@@ -5,5 +5,4 @@ from django.shortcuts import render
 def index(request):
     title = "MtaaInfo Application"
 
-
     return render(request, 'index.html',{"title":title})

@@ -1,0 +1,47 @@
+{% load static %}
+<link href="https://fonts.googleapis.com/css?family=Archivo+Narrow|Charmonman|Kodchasan|Dancing+Script|Spirax" rel="stylesheet">
+
+     <nav class="navbar navbar-expand navbar-light ">
+            <a href="#"></a>
+            <a class="instalogo" href="/"><span style="font-size: 50px;" >RateMe</span></a>
+         
+            <a href="#"></a>
+
+            <div class="search">
+                <form class="form-inline my-2 my-lg-0" role="search" action="{% url 'search' %}">
+                    <input class="form-control mr-sm-1" type="search" placeholder="Search" aria-label="Search"
+                        name="project">
+                    <button class="btn btn-outline-info my-2 my-sm-0" type="submit">Search</button>
+                </form>
+            </div>
+
+            <ul class="navbar-nav mr-auto nav-right-items nav_icons">
+                <li class="nav-item">
+                    <a class="nav-link" href="/">
+                        <i class="fas fa-home nav-icons">HOME</i>
+                    </a>
+                </li>
+               
+                    <li class="dropdown" >
+                        <a href="#" data-toggle="dropdown"><i class="far fa-user"></i>
+                            <span><img src="{{profile.profile_photo.url}}" alt=""
+                                    style="border-radius: 50%; width:50px; height:50px; border-color: brown; border-width: 1px;"></span>
+                            <b class="caret"></b>
+                        </a>
+                        <ul class="dropdown-menu" st>
+                            <li><i class="fas fa-plus btn btn-outline-info btn-sm"></i><a
+                                    href="{%url 'uploadProject'%}"style="font-size: 20px;">Post a Project</a></li>
+                            <li><i class="fas fa-user btn btn-outline-info btn-sm"></i><a
+                                    href="{%url 'profile'%}" style="font-size: 20px;">My Profile</a></li>
+                            <li><i class="far fa-user-edit btn btn-outline-info btn-sm"></i><a
+                                    href="{%url 'edit'%}" style="font-size: 20px;">Update Profile</a>
+                                <div class="card-footer">
+                                    <a class="text-muted"><i class="fas fa-sign-out-alt "></i><a
+                                            href="{%url 'logout'%}" style="font-size: 20px;">Logout</a>
+                                </div>
+                            </li>
+                        </ul>
+                    </li>
+                </ul>
+            </ul>
+      </nav>

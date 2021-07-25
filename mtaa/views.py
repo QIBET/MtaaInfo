@@ -3,6 +3,7 @@ from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.forms import UserCreationForm
 from django.shortcuts import redirect, render
+from .models import Profile,
 
 from .forms import CreateUserForm
 
@@ -53,3 +54,13 @@ def loginUser(request):
 def logoutUser(request):
 	logout(request)
 	return redirect('login')
+
+def profile(request):
+    '''
+	returns user profile from a pool of profiles
+	'''
+    current_user=request.user
+    profile= Profile.objects.filter(user=current_user).first()
+     
+    
+    return render(request,'profile.html',{"profile":profile,"current_user":current_user})

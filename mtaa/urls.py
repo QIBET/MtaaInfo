@@ -7,6 +7,8 @@ urlpatterns=[
     path('register/', views.register, name="register"),
 	path('login/', views.loginUser, name="login"), 
     path('logout/',views.logoutUser,name="logout") ,
-    path(r'^profile/$', views.profile,name='profile'),
-    path(r'^edit/$',views.profile_update,name='edit'),
+    path('profile/$', views.profile,name='profile'),
+    path('edit/',views.profile_update,name='edit'),
+    path('neighbourhood/', views.create_neighbourhood,name='newneighbourhood'),
+
 ]

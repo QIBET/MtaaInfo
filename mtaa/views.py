@@ -4,7 +4,7 @@ from django.contrib.auth.decorators import login_required
 from django.contrib.auth.forms import UserCreationForm
 from django.shortcuts import redirect, render
 from .models import Profile,Neighbourhood
-from .forms import ProfileForm
+from .forms import ProfileForm,NeighbourhoodForm
 
 from .forms import CreateUserForm
 
@@ -77,3 +77,19 @@ def profile_update(request):
     else:
         form = ProfileForm()
         return render(request,'update_profile.html',{"form":form})
+
+def create_neighbourhood(request):
+    '''
+    method that creates neighbourhoods
+    '''
+    if request.method == 'POST':
+        form = NeighbourhoodForm(request.POST,request.FILES)
+        print(form.errors)
+        if form.is_valid():
+            hood = form.save(commit=False)
+            hood.user = request.user.profile
+            hood.save()
+            return redirect('index')
+    else:
+        form = NeighbourhoodForm()
+    return render(request,'newneighbourhood.html', {"form":form})

@@ -97,22 +97,14 @@
             <a href="#"></a>
             <a class="instalogo" href="/"><span style="font-size: 50px;" ><em>Mtaa</em>Info</span></a>
          
-            <a href="#"></a>
+            <a href="{%url 'index'%}"style="font-size: 20px;">Neighbourhoods</a>
 
-            <div class="search">
-                <form class="form-inline my-2 my-lg-0" role="search" action="/">
-                    <input class="form-control mr-sm-1" type="search" placeholder="Search" aria-label="Search"
-                        name="project">
-                    <button class="btn btn-outline-info my-2 my-sm-0" type="submit">Search</button>
-                </form>
-            </div>
+            
 
             <ul class="navbar-nav mr-auto nav-right-items nav_icons">
                 <li class="nav-item">
-                    <a class="nav-link" href="{% url 'index' %}">
-                        <i class="fas fa-home nav-icons">Neighbourhoods</i>
-                    </a>
-                </li>
+                    <a class="nav-link" href="{% url 'newneighbourhood' %}">Add Neighbourhood</a>                </a>
+                    
                 {% if user.is_authenticated %}
 
                     <li class="dropdown" >
@@ -122,8 +114,7 @@
                             <b class="caret"></b>
                         </a>
                         <ul class="dropdown-menu" st>
-                            <li><i class="fas fa-plus btn btn-outline-info btn-sm"></i><a
-                                href="{%url 'newneighbourhood'%}"style="font-size: 20px;">Create a New Neighbourhood</a></li>
+                            
                             <li><i class="fas fa-user btn btn-outline-info btn-sm"></i><a
                                 href="{%url 'profile'%}" style="font-size: 20px;">My Profile</a></li>
                             <li><i class="far fa-user-edit btn btn-outline-info btn-sm"></i><a

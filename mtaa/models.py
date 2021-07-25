@@ -12,9 +12,10 @@ class Profile(models.Model):
     '''
     image=CloudinaryField('image',blank=True,null=True)
     bio=models.TextField(max_length=100)
-    user = models.OneToOneField(User,on_delete=models.CASCADE,primary_key=True)
+    user = models.OneToOneField(User,on_delete=models.CASCADE,related_name='profile')
     email=models.EmailField(max_length=254, blank=True,null=True)
     contact=models.CharField(max_length=40,null=True)
+    neighbourhood = models.ForeignKey("Neighbourhood",on_delete=models.CASCADE, default='', null=True, blank=True)
 
     def _str_(self):
         return self.bio
@@ -38,7 +39,7 @@ class Neighbourhood(models.Model):
     hood_name = models.CharField(max_length=50)
     image = CloudinaryField('image',null=True, blank=True)
     location = models.CharField(max_length=50)
-    admin = models.CharField(max_length=50)
+    admin = models.ForeignKey("Profile",on_delete=models.CASCADE, related_name = 'hood') 
     description = models.TextField()
     health_contact = models.IntegerField(null=True, blank=True)
     police_contact = models.IntegerField(null=True, blank=True)
@@ -80,6 +81,11 @@ class Business(models.Model):
 
     def delete_business(self):
         self.delete()
+
+    @classmethod
+    def hood_biz(cls, id):
+        hoodbiznas = Business.objects.filter(neighbourhood = id)
+        return hoodbiznas
 
 class Post(models.Model):
     title = models.CharField(max_length=100, null=True)

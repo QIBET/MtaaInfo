@@ -35,9 +35,9 @@ class Profile(models.Model):
         return hoods
 
 class Neighbourhood(models.Model):
-    hood_name = models.CharField(max_length=100)
-    location = models.CharField(max_length=100)
-    admin = models.ForeignKey(Profile, on_delete=models.CASCADE)
+    hood_name = models.CharField(max_length=50)
+    location = models.CharField(max_length=50)
+    admin = models.CharField(max_length=50)
     description = models.TextField()
     health_contact = models.IntegerField(null=True, blank=True)
     police_contact = models.IntegerField(null=True, blank=True)

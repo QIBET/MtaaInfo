@@ -53,6 +53,10 @@ class Neighbourhood(models.Model):
         self.delete() 
 
     @classmethod
+    def get_neighbourhood(cls):
+        all_hoods=cls.objects.all()
+        return all_hoods
+    @classmethod
     def search_hood(cls,search_term):
         hoods = cls.objects.filter(hood_name__icontains=search_term)
         return hoods

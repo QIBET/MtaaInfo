@@ -3,7 +3,7 @@ from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.forms import UserCreationForm
 from django.shortcuts import redirect, render
-from .models import Profile
+from .models import Profile,Neighbourhood
 from .forms import ProfileForm
 
 from .forms import CreateUserForm
@@ -11,9 +11,8 @@ from .forms import CreateUserForm
 # Create your views here.
 
 def index(request):
-    title = "MtaaInfo Application"
-
-    return render(request, 'index.html',{"title":title})
+    neighbourhoods = Neighbourhood.get_neighbourhood()
+    return render(request, 'index.html', {"neighbourhoods":neighbourhoods})
 
 def register(request):
 	if request.user.is_authenticated:

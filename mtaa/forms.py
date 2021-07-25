@@ -1,6 +1,7 @@
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.models import User
 from django import forms
+from django.db.models import fields
 from . models import Neighbourhood, Profile,Business,Post
 
 
@@ -20,9 +21,9 @@ class ProfileForm(forms.ModelForm):
 class UpdateProfileForm(forms.ModelForm):
     class Meta:
         model = Profile
-        exclude = ['user',]
+        exclude = ['user']
 
 class NeighbourhoodForm(forms.ModelForm):
     class Meta:
-        model = Neighbourhood
-       
+        model = Profile
+        fields = ['hood_name','location','admin','description','health_contact','police_contact','occupant_count']

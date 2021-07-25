@@ -11,7 +11,7 @@ class Profile(models.Model):
     class to create instances of profiles
     '''
     image=CloudinaryField('image',blank=True,null=True)
-    bio=models.TextFields(max_length=100)
+    bio=models.TextField(max_length=100)
     user=models.ForeignKey(User,on_delete=models.CASCADE)
     email=models.EmailField(max_length=254, blank=True,null=True)
     contact=models.TextField(max_length=40,null=True)

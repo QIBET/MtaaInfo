@@ -3,7 +3,7 @@ from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.forms import UserCreationForm
 from django.shortcuts import redirect, render
-from .models import Profile,
+from .models import Profile
 
 from .forms import CreateUserForm
 
@@ -64,3 +64,16 @@ def profile(request):
      
     
     return render(request,'profile.html',{"profile":profile,"current_user":current_user})
+def profile_update(request):
+    current_user = request.user
+    if request.method == 'POST':
+        form = ProfileForm(request.POST,request.FILES)
+        if form.is_valid():
+            image = form.save(commit=False)
+            image.user = current_user
+            image.save()
+        return redirect('profile')
+
+    else:
+        form = ProfileForm()
+        return render(request,'update_profile.html',{"form":form}

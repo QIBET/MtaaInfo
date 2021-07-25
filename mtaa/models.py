@@ -37,7 +37,7 @@ class Profile(models.Model):
 class Neighbourhood(models.Model):
     hood_name = models.CharField(max_length=100)
     location = models.CharField(max_length=100)
-    admin = models.ForeignKey(Profile, on_delete=models.CASCADE, related_name='hood')
+    admin = models.ForeignKey(Profile, on_delete=models.CASCADE)
     description = models.TextField()
     health_contact = models.IntegerField(null=True, blank=True)
     police_contact = models.IntegerField(null=True, blank=True)
@@ -59,3 +59,35 @@ class Neighbourhood(models.Model):
     @classmethod
     def find_neighbourhood(cls, neighbourhood_id):
         return cls.objects.filter(id=neighbourhood_id)
+
+class Business(models.Model):
+    name = models.CharField(max_length=100)
+    email = models.EmailField(max_length=100)
+    description = models.TextField(blank=True)
+    neighbourhood = models.ForeignKey(Neighbourhood, on_delete=models.CASCADE)
+    user = models.ForeignKey(Profile, on_delete=models.CASCADE)
+
+    def __str__(self):
+        return f'{self.name}Business'
+
+    def save_business(self):
+        self.save()
+
+    def delete_business(self):
+        self.delete()
+
+class Post(models.Model):
+    title = models.CharField(max_length=100, null=True)
+    post = models.TextField()
+    date = models.DateTimeField(auto_now_add=True)
+    user = models.ForeignKey(Profile, on_delete=models.CASCADE)
+    hood_name = models.ForeignKey(Neighbourhood, on_delete=models.CASCADE)
+
+    def __str__(self):
+        return f'{self.title} Post'
+
+    def save_post(self):
+        self.save()
+
+    def delete_post(self):
+        self.delete()

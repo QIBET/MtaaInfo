@@ -16,11 +16,12 @@
       {% for hood in neighbourhoods %}
       <div class="col-md-4">
         <div class="card mb-4">
-          <h5 class="card-title p-2">Hood Name ~ <span class="hood-name" style="font-style: italic;">{{ hood.hood_name }}</span></h5>
-         
+          <h5 class="card-title p-2"><b>Hood Name :</b><span style="color: blueviolet;">{{ hood.hood_name }}</span></h5>
+          <img src="{{ hood.image.url }}" class="card-img-top" alt="{{ hood.hood_name }}" height="180px">
+
           <div class="card-body">
-            <p class="card-text">{{hood.description}}</p>
-            <p>Hood Location ~ {{hood.location}}</p>
+            <p class="card-text"><b>Hood Description :</b><br>{{hood.description}}</p>
+            <p><b>Hood Location :</b> {{hood.location}}</p>
            
 
           </div>

@@ -87,7 +87,7 @@ def create_neighbourhood(request):
         print(form.errors)
         if form.is_valid():
             hood = form.save(commit=False)
-            hood.user = request.user.profile
+           # hood.user = request.user.profile
             hood.save()
             return redirect('index')
     else:

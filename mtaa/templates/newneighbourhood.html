@@ -20,7 +20,7 @@
     <form action="{% url 'newneighbourhood' %}" method="post" enctype="multipart/form-data">
         {% csrf_token %}
         {% bootstrap_form form%}
-        <input type="submit" class="btn btn-success btn-lg" value="Upload Project">
+        <input type="submit" class="btn btn-success btn-lg" value="Submit Neighbourhood">
     </form>
 
     {% block scripts %}

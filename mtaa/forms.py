@@ -26,4 +26,4 @@ class UpdateProfileForm(forms.ModelForm):
 class NeighbourhoodForm(forms.ModelForm):
     class Meta:
         model = Neighbourhood
-        fields = ('hood_name','location','admin','description','health_contact','police_contact','occupant_count')
+        fields = ('hood_name','location','admin','description','health_contact','police_contact','occupant_count','image')

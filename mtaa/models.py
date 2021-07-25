@@ -14,7 +14,7 @@ class Profile(models.Model):
     bio=models.TextField(max_length=100)
     user = models.OneToOneField(User,on_delete=models.CASCADE,primary_key=True)
     email=models.EmailField(max_length=254, blank=True,null=True)
-    contact=models.TextField(max_length=40,null=True)
+    contact=models.CharField(max_length=40,null=True)
 
     def _str_(self):
         return self.bio
@@ -36,6 +36,7 @@ class Profile(models.Model):
 
 class Neighbourhood(models.Model):
     hood_name = models.CharField(max_length=50)
+    image = CloudinaryField('image',null=True, blank=True)
     location = models.CharField(max_length=50)
     admin = models.CharField(max_length=50)
     description = models.TextField()

@@ -12,7 +12,7 @@ class Profile(models.Model):
     '''
     image=CloudinaryField('image',blank=True,null=True)
     bio=models.TextField(max_length=100)
-    user=models.ForeignKey(User,on_delete=models.CASCADE)
+    user = models.OneToOneField(User,on_delete=models.CASCADE,primary_key=True)
     email=models.EmailField(max_length=254, blank=True,null=True)
     contact=models.TextField(max_length=40,null=True)
 

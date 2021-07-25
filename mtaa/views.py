@@ -4,6 +4,7 @@ from django.contrib.auth.decorators import login_required
 from django.contrib.auth.forms import UserCreationForm
 from django.shortcuts import redirect, render
 from .models import Profile
+from .forms import ProfileForm
 
 from .forms import CreateUserForm
 
@@ -76,4 +77,4 @@ def profile_update(request):
 
     else:
         form = ProfileForm()
-        return render(request,'update_profile.html',{"form":form}
+        return render(request,'update_profile.html',{"form":form})

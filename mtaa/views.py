@@ -96,7 +96,7 @@ def create_neighbourhood(request):
 
 
 def businesses(request, id):
-    business = Business. neighbourhood_biz(id=id)
+    business = Business.neighbourhood_business(id=id)
     return render(request, 'business.html', {'business': business})
 
 def singlehood(request, id):
@@ -147,6 +147,6 @@ def post(request):
         form = PostForm()
     return render(request, 'new_post.html', {"form": form})
 
-def neighbourhood_post(request, id):
+def neighbourhood_post(request,id):
     posts = Post.hood_post(id=id)
     return render(request, 'post.html', {'posts': posts})

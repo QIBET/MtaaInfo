@@ -80,7 +80,7 @@ class Business(models.Model):
     name = models.CharField(max_length=100)
     email = models.EmailField(max_length=100)
     description = models.TextField(blank=True)
-    neighbourhood = models.ForeignKey("Neighbourhood", on_delete=models.CASCADE)
+    neighbourhood = models.ForeignKey(Neighbourhood, on_delete=models.CASCADE,null=True)
     user = models.ForeignKey(User, on_delete=models.CASCADE,null=True)
 
     def __str__(self):
@@ -93,7 +93,7 @@ class Business(models.Model):
         self.delete()
 
     @classmethod
-    def neighbourhood_biz(cls, id):
+    def neighbourhood_business(cls, id):
         allhood_business = Business.objects.filter(neighbourhood = id)
         return allhood_business
 
@@ -102,10 +102,11 @@ class Post(models.Model):
     post = models.TextField()
     date = models.DateTimeField(auto_now_add=True)
     user = models.ForeignKey(User, on_delete=models.CASCADE)
-    neighbourhood = models.ForeignKey("Neighbourhood", on_delete=models.CASCADE)
+    neighbourhood = models.ForeignKey(Neighbourhood, on_delete=models.CASCADE,null=True)
 
     def __str__(self):
         return f'{self.title} Post'
+    
     @classmethod
     def hood_post(cls,id):
         hoodposts = Post.objects.filter(neighbourhood = id)

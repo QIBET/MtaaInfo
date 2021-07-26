@@ -16,5 +16,7 @@ urlpatterns=[
     path('joinhood/<id>', views.joinhood, name='joinhood'),
     path('leavehood/<id>', views.leavehood, name='leavehood'),
     path('post', views.post, name='post'),
+    path('hoodpost/<id>', views.neighbourhood_post, name='hoodpost'),
+
 
 ]

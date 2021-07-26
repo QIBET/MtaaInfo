@@ -145,4 +145,8 @@ def post(request):
 
     else:
         form = PostForm()
-    return render(request, 'post.html', {"form": form})
+    return render(request, 'new_post.html', {"form": form})
+
+def neighbourhood_post(request, id):
+    post = Post.hood_post(id=id)
+    return render(request, 'post.html', {'post': post})

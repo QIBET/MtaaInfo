@@ -4,7 +4,7 @@ from django.contrib.auth.decorators import login_required
 from django.contrib.auth.forms import UserCreationForm
 from django.shortcuts import redirect, render,get_object_or_404
 from .models import Profile,Neighbourhood,Business,Post
-from .forms import ProfileForm,NeighbourhoodForm,BusinessForm
+from .forms import ProfileForm,NeighbourhoodForm,BusinessForm,PostForm
 
 from .forms import CreateUserForm
 
@@ -96,14 +96,14 @@ def create_neighbourhood(request):
 
 
 def businesses(request, id):
-    business = Business. hood_biz(id=id)
+    business = Business. neighbourhood_biz(id=id)
     return render(request, 'business.html', {'business': business})
 
 def singlehood(request, id):
     hood = Neighbourhood.objects.get(id=id)
     return render(request, 'single_hood.html', {'hood':hood})
 
-def newbiz(request):
+def newBusiness(request):
     current_user = request.user
     if request.method == 'POST':
         form = BusinessForm(request.POST, request.FILES)
@@ -113,7 +113,7 @@ def newbiz(request):
 
             business.save()
 
-        return redirect('hood')
+        return redirect('index')
 
     else:
         form = BusinessForm()
@@ -122,11 +122,27 @@ def joinhood(request, id):
     hood = get_object_or_404(Neighbourhood, id=id)
     request.user.profile.neighbourhood = hood
     request.user.profile.save()
-    return redirect('hood')
+    return redirect('index')
 
 
 def leavehood(request, id):
     hood = get_object_or_404(Neighbourhood, id=id)
     request.user.profile.neighbourhood = None
     request.user.profile.save()
-    return redirect('hood')
+    return redirect('index')
+
+def post(request):
+    current_user = request.user
+    if request.method == 'POST':
+        form = PostForm(request.POST, request.FILES)
+        if form.is_valid():
+            post = form.save(commit=False)
+            post.user = current_user
+
+            post.save()
+
+        return redirect('index')
+
+    else:
+        form = PostForm()
+    return render(request, 'post.html', {"form": form})

@@ -8,35 +8,29 @@
 
 
 {% block content %}
+
 <!-- Landing Page -->
 
-<div class="container-fluid">
-    
+<div class="container-fluid" style='background-color: blanchedalmond;'>
     <div class="row">
-       
       {% for hood in neighbourhoods %}
-      <div class="col-md-4">
-        <div class="card mb-4">
-          <h5 class="card-title p-2"><b>Hood Name :</b><span style="color: blueviolet;">{{ hood.hood_name }}</span></h5>
-          <img src="{{ hood.image.url }}" class="card-img-top" alt="{{ hood.hood_name }}" height="180px">
+        <div class="card m-4" style="width: 22rem;">
+          <img class="card-img-top" src="{{hood.image.url}}" alt="Card image cap" height="200px">
+          <div class="card-body" style='background-color: rgb(205, 213, 255);' >
+            <h5 class="card-title" style="font-family: 'Sail', cursive;
+            font-family: 'Vast Shadow', cursive;"><b>Neighbourhood Name :</b>{{hood.hood_name}}</h5>
+            <p class="card-text"><b>Neighbourhood Location :</b><br>{{hood.location}}</p>
+            {%if request.user.profile.neighbourhood == hood %}
+              <a class="btn btn-warning btn-small" href="{%url 'singlehood' hood.id%}">View Hood</a>
+              <a class="btn btn-danger" href="{%url 'leavehood' hood.id%}">Leave Hood</a>
+              {%elif not request.user.profile.neighbourhood%}
+              <a class="btn btn-success" href="{%url 'joinhood' hood.id%}">Join Hood</a>
+            {%endif%}
 
-          <div class="card-body">
-            <p><b>Hood Location :</b> {{hood.location}}</p>
-              {%if request.user.profile.neighbourhood == hood %}
-
-                  <a class="btn btn-default btn-small" href="{%url 'singlehood' hood.id%}">View Hood</a>
-                  <a class="btn btn-danger" href="{%url 'leavehood' hood.id%}">Leave Hood</a>
-
-                  {%elif not request.user.profile.neighbourhood%}
-
-
-                  <a class="btn btn-default" href="{%url 'joinhood' hood.id%}">Join Hood</a>
-
-              {%endif%}
+                       
           </div>
         </div>
-      </div>
-      {% endfor %}
+      {%endfor%}
     </div>
 </div>
-{% endblock %}
+{%endblock%}

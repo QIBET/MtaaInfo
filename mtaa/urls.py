@@ -12,7 +12,9 @@ urlpatterns=[
     path('neighbourhood/', views.create_neighbourhood,name='newneighbourhood'),
     path('businesses/<id>', views.businesses, name='hoodbusiness'),
     path('singlehood/<id>', views.singlehood, name='singlehood'),
-    path('new_business/', views.newbiz, name='newbiz'),
+    path('new_business/', views.newBusiness, name='newbusiness'),
     path('joinhood/<id>', views.joinhood, name='joinhood'),
     path('leavehood/<id>', views.leavehood, name='leavehood'),
+    path('post', views.post, name='post'),
+
 ]

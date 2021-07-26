@@ -17,15 +17,16 @@
 
 <body>
     <div class="container">
-    <form action="{% url 'newneighbourhood' %}" method="post" enctype="multipart/form-data">
-        {% csrf_token %}
-        {% bootstrap_form form%}
-        <input type="submit" class="btn btn-success btn-lg" value="Submit Neighbourhood">
-    </form>
-
-    {% block scripts %}
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-    {% bootstrap_javascript %}
-    {% endblock %}
+        <h3 class="text-center" style="font-family: 'Kanit', sans-serif; padding-top:40px;">Add Neighbourhood</h3>
+        <div class="col-sm-12 col-lg-6 m-auto card" style="background-color: lavenderblush;">
+            <form action="{%url 'newneighbourhood' %}" method="post" enctype="multipart/form-data">
+                <br>
+                {%csrf_token%}
+    
+                {% bootstrap_form form%}
+                <input type="submit" class="btn btn-success btn-lg btn-center" value="Submit Neighbourhood"><br><br>
+            </form>
+           
+        </div><br>
     </div>
 </body>

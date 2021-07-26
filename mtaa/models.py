@@ -4,6 +4,7 @@ from django.db import models
 from django.contrib.auth.models import User
 from django.utils import timezone 
 from django.dispatch import receiver
+from django.db.models.signals import post_save
 
 # Create your models here.
 class Profile(models.Model):
@@ -12,7 +13,7 @@ class Profile(models.Model):
     '''
     image=CloudinaryField('image',blank=True,null=True)
     bio=models.TextField(max_length=100)
-    user = models.OneToOneField(User,on_delete=models.CASCADE,related_name='profile')
+    user = models.OneToOneField(User,on_delete=models.CASCADE,related_name='profile',primary_key=True)
     email=models.EmailField(max_length=254, blank=True,null=True)
     contact=models.CharField(max_length=40,null=True)
     neighbourhood = models.ForeignKey("Neighbourhood",on_delete=models.CASCADE, default='', null=True, blank=True)
@@ -25,6 +26,15 @@ class Profile(models.Model):
 
     def delete_profile(self):
         self.delete() 
+    @receiver(post_save, sender=User)
+    def create_user_profile(sender, instance, created, **kwargs):
+
+        if created:
+            Profile.objects.create(user=instance)
+    @receiver(post_save, sender=User)
+    def save_profile(sender, instance, **kwargs):
+        instance.profile.save()
+        
     @classmethod 
     def get_profile(cls):
        profile=Profile.objects.all()
@@ -39,7 +49,7 @@ class Neighbourhood(models.Model):
     hood_name = models.CharField(max_length=50)
     image = CloudinaryField('image',null=True, blank=True)
     location = models.CharField(max_length=50)
-    admin = models.ForeignKey("Profile",on_delete=models.CASCADE, related_name = 'hood') 
+    admin = models.ForeignKey("Profile",on_delete=models.CASCADE, related_name = 'hood',null=True) 
     description = models.TextField()
     health_contact = models.IntegerField(null=True, blank=True)
     police_contact = models.IntegerField(null=True, blank=True)

@@ -22,21 +22,21 @@
 
           <div class="card-body">
             <p><b>Hood Location :</b> {{hood.location}}</p>
-            {%if request.user.profile.neighbourhood == hood %}
+              {%if request.user.profile.neighbourhood == hood %}
 
-                <a class="btn btn-default btn-small" href="{%url 'singlehood' hood.id%}">View Hood</a>
-                <a class="btn btn-danger" href="{%url 'leavehood' hood.id%}">Leave Hood</a>
+                  <a class="btn btn-default btn-small" href="{%url 'singlehood' hood.id%}">View Hood</a>
+                  <a class="btn btn-danger" href="{%url 'leavehood' hood.id%}">Leave Hood</a>
 
-                {%elif not request.user.profile.neighbourhood%}
+                  {%elif not request.user.profile.neighbourhood%}
 
 
-                <a class="btn btn-default" href="{%url 'joinhood' hood.id%}">Join Hood</a>
+                  <a class="btn btn-default" href="{%url 'joinhood' hood.id%}">Join Hood</a>
 
-            {%endif%}
+              {%endif%}
           </div>
         </div>
       </div>
       {% endfor %}
     </div>
-  </div>
+</div>
 {% endblock %}

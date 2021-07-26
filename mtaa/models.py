@@ -80,7 +80,7 @@ class Business(models.Model):
     name = models.CharField(max_length=100)
     email = models.EmailField(max_length=100)
     description = models.TextField(blank=True)
-    neighbourhood = models.ForeignKey("Neighbourhood", on_delete=models.CASCADE,null=True)
+    neighbourhood = models.ForeignKey("Neighbourhood", on_delete=models.CASCADE)
     user = models.ForeignKey(User, on_delete=models.CASCADE,null=True)
 
     def __str__(self):
@@ -102,13 +102,13 @@ class Post(models.Model):
     post = models.TextField()
     date = models.DateTimeField(auto_now_add=True)
     user = models.ForeignKey(User, on_delete=models.CASCADE)
-    neighbourhood = models.ForeignKey("Neighbourhood", on_delete=models.CASCADE,null=True)
+    neighbourhood = models.ForeignKey("Neighbourhood", on_delete=models.CASCADE)
 
     def __str__(self):
         return f'{self.title} Post'
     @classmethod
     def hood_post(cls,id):
-        hoodposts = Post.objects.filter(hood_name = id)
+        hoodposts = Post.objects.filter(neighbourhood = id)
         return hoodposts
 
     def save_post(self):

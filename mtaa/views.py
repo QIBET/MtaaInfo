@@ -148,5 +148,5 @@ def post(request):
     return render(request, 'new_post.html', {"form": form})
 
 def neighbourhood_post(request, id):
-    post = Post.hood_post(id=id)
-    return render(request, 'post.html', {'post': post})
+    posts = Post.hood_post(id=id)
+    return render(request, 'post.html', {'posts': posts})

@@ -25,7 +25,27 @@ class ProfileTestCase(TestCase):
     
     def test_get_all_profiles(self):
        
-        self.profiles.save_profile()
+        self.bernard.save_profile()
         all_profiles = Profile.get_profile()
         self.assertTrue(len(all_profiles) < 1)
+class NeighbourhoodTestCase(TestCase):
+    def setUp(self):
+        self.new_neighborhood= Neighbourhood(hood_name ='Kadeya',location = 'Nairobi',image = 'kadeya.jpg',description = 'lavish stand-alone villas',user = 'bernard', health_contact= '00100',police_contact= '999',occupant_count ='1')
 
+
+    def test_save_neighbourhood(self):
+        self.new_neighborhood.save_hood()
+        hoods = Neighbourhood.objects.all()
+        self.assertEqual(len(hoods)>0)
+
+    def test_delete_image(self):
+        self.new_neighborhood.save_hood()
+        self.new_neighborhood.delete_hood()
+        hoods = Neighbourhood.objects.all()
+        self.assertTrue(len(hoods)==0)
+
+    def test_get_hoods(self):
+       
+        self.new_neighborhood.save_hood()
+        hoods = Neighbourhood.get_neighbourhood()
+        self.assertTrue(len(hoods) < 1)

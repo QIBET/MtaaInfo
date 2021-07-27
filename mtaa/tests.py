@@ -49,3 +49,25 @@ class NeighbourhoodTestCase(TestCase):
         self.new_neighborhood.save_hood()
         hoods = Neighbourhood.get_neighbourhood()
         self.assertTrue(len(hoods) < 1)
+
+class BusinessTestCase(TestCase):
+    def setUp(self):
+        self.new_business= Business(name = 'jerrys',email = 'jerry@gmail',description='Grocery stores',hood_name = 'Kadeya',user = 'Peris',admin='Eric')
+
+
+    def test_save_business(self):
+        self.new_business.save_business()
+        businesses = Business.objects.all()
+        self.assertEqual(len(businesses)>0)
+
+    def test_delete_image(self):
+        self.new_business.save_business()
+        self.new_business.delete_business()
+        businesses = Neighbourhood.objects.all()
+        self.assertTrue(len(businesses)==0)
+
+    def test_get_biz(self):
+       
+        self.new_business.save_business()
+        businesses = Business.neighbourhood_business()
+        self.assertTrue(len(businesses) < 1)

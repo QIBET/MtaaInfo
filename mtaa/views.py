@@ -9,7 +9,7 @@ from .forms import ProfileForm,NeighbourhoodForm,BusinessForm,PostForm
 from .forms import CreateUserForm
 
 # Create your views here.
-
+@login_required (login_url="login")
 def index(request):
     neighbourhoods = Neighbourhood.get_neighbourhood()
     return render(request, 'index.html', {"neighbourhoods":neighbourhoods})

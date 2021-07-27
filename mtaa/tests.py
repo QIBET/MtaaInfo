@@ -60,7 +60,7 @@ class BusinessTestCase(TestCase):
         businesses = Business.objects.all()
         self.assertEqual(len(businesses)>0)
 
-    def test_delete_image(self):
+    def test_delete_business(self):
         self.new_business.save_business()
         self.new_business.delete_business()
         businesses = Neighbourhood.objects.all()
@@ -71,3 +71,23 @@ class BusinessTestCase(TestCase):
         self.new_business.save_business()
         businesses = Business.neighbourhood_business()
         self.assertTrue(len(businesses) < 1)
+class PostTestCase(TestCase):
+    def setUp(self):
+        self.new_post = Post(title = 'Run',post = 'Great run this morning',date = '26-07-2020',user = 'bernard',hood_name = 'Kadeya')
+
+    def test_save_post(self):
+        self.new_post.save_post()
+        posts = Post.objects.all()
+        self.assertEqual(len(posts)>0)
+
+    def test_delete_post(self):
+        self.new_post.save_post()
+        self.new_post.delete_post()
+        posts = Post.objects.all()
+        self.assertTrue(len(posts)==0)
+
+    def test_get_posts_by_id(self):
+       
+        self.new_post.save_post()
+        posts = Post.hood_post()
+        self.assertTrue(len(posts) < 1)
